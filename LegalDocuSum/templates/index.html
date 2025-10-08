@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Document Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚖️ Legal Document Summarizer</h1>
+            <p class="subtitle">AI-Powered Document Analysis in Multiple Languages</p>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-icon">📄</div>
+                    <h2>Upload Your Document</h2>
+                    <p>Supports PDF, DOCX, and TXT files (Max 16MB)</p>
+                    
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <div class="file-input-wrapper">
+                            <input type="file" id="fileInput" name="file" accept=".pdf,.docx,.txt" required>
+                            <label for="fileInput" class="file-label">
+                                <span class="file-icon">📎</span>
+                                <span class="file-text">Choose File</span>
+                            </label>
+                            <span class="file-name" id="fileName">No file chosen</span>
+                        </div>
+
+                        <div class="language-selector">
+                            <label for="language">Summary Language:</label>
+                            <select id="language" name="language" required>
+                                <option value="english">English</option>
+                                <option value="hindi">हिन्दी (Hindi)</option>
+                                <option value="kannada">ಕನ್ನಡ (Kannada)</option>
+                            </select>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="submit" class="btn btn-primary" id="summarizeBtn">
+                                <span class="btn-icon">✨</span>
+                                Summarize Document
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h2>📋 Summary</h2>
+                        <button class="btn btn-secondary" id="listenBtn">
+                            <span class="btn-icon">🔊</span>
+                            Listen
+                        </button>
+                    </div>
+                    <div class="summary-content" id="summaryContent"></div>
+                    <div class="file-info" id="fileInfo"></div>
+                </div>
+            </div>
+
+            <div class="loading-section" id="loadingSection" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Analyzing your document...</p>
+            </div>
+
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-card">
+                    <span class="error-icon">⚠️</span>
+                    <h3>Error</h3>
+                    <p id="errorMessage"></p>
+                    <button class="btn btn-secondary" onclick="location.reload()">Try Again</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Gemini AI • Built with Flask & Vanilla JS</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
